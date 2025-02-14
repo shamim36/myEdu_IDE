@@ -1,0 +1,10 @@
+^D:\FINALYEARDEFENCE\IDE\BUILD\WINDOWS\X64\CMAKEFILES\A05E46C28C850A21C3F2BFF3859E2D0F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/FinalYearDefence/ide/windows -BD:/FinalYearDefence/ide/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/FinalYearDefence/ide/build/windows/x64/ide.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
