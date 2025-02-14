@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HackerEarth IDE v4',
+      title: 'MyEdu IDE v4',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const CodeEditorScreen(),
     );
@@ -24,7 +24,7 @@ class HackerEarthService {
     headers: {
       'client-secret': 'd3139107cbc9a314523e000c3c1b363fcc6fbe79',
       'Content-Type': 'application/json',
-      
+
     },
   ));
 
@@ -190,7 +190,7 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('HackerEarth IDE v4')),
+      appBar: AppBar(title: const Text('MyEdu IDE v4')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -278,3 +278,5 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
         ),
       ),
     );
+  }
+}
