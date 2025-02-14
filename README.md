@@ -1,4 +1,4 @@
-# ide
+# MyEdu ide
 
 A new Flutter project.
 

@@ -24,7 +24,6 @@ class HackerEarthService {
     headers: {
       'client-secret': 'd3139107cbc9a314523e000c3c1b363fcc6fbe79',
       'Content-Type': 'application/json',
-
     },
   ));
 
@@ -81,8 +80,17 @@ class CodeEditorScreen extends StatefulWidget {
 class _CodeEditorScreenState extends State<CodeEditorScreen> {
   final HackerEarthService _service = HackerEarthService();
   final List<String> _languages = [
-    'PYTHON', 'PYTHON3', 'CPP14', 'CPP17', 'JAVA8', 'JAVA14',
-    'JAVASCRIPT_NODE', 'CSHARP', 'GO', 'RUST', 'SWIFT'
+    'PYTHON',
+    'PYTHON3',
+    'CPP14',
+    'CPP17',
+    'JAVA8',
+    'JAVA14',
+    'JAVASCRIPT_NODE',
+    'CSHARP',
+    'GO',
+    'RUST',
+    'SWIFT'
   ];
   String _selectedLang = 'PYTHON3';
   String _sourceCode = '';
@@ -116,7 +124,7 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
 
       _heId = response['he_id'];
       if (_heId == null) throw Exception('No HE ID received');
-      
+
       _startPolling();
     } catch (e) {
       _showError(e.toString());
@@ -133,7 +141,7 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
       try {
         final statusResponse = await _service.getStatus(_heId!);
         final statusCode = statusResponse['request_status']['code'];
-        
+
         setState(() => _status = statusResponse['request_status']['message']);
 
         if (statusCode == 'REQUEST_COMPLETED') {
@@ -206,7 +214,8 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
                               child: Text(lang),
                             ))
                         .toList(),
-                    onChanged: (value) => setState(() => _selectedLang = value!),
+                    onChanged: (value) =>
+                        setState(() => _selectedLang = value!),
                   ),
                 ),
                 ElevatedButton(
@@ -222,7 +231,8 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
                   Expanded(
                     child: Column(
                       children: [
-                        const Text('Code Editor', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text('Code Editor',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         Expanded(
                           child: TextField(
                             maxLines: null,
@@ -241,7 +251,8 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
                   Expanded(
                     child: Column(
                       children: [
-                        const Text('Input', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const Text('Input',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         Expanded(
                           child: TextField(
                             maxLines: null,
@@ -262,15 +273,36 @@ class _CodeEditorScreenState extends State<CodeEditorScreen> {
             const SizedBox(height: 16),
             if (_isLoading) ...[
               LinearProgressIndicator(value: null),
-              Text(_output, style: const TextStyle(color: Colors.blue)),
+              Expanded(
+                  child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Text("id : $_heId",
+                        style: const TextStyle(color: Colors.blue)),
+                    Text("Status : $_status",
+                        style: const TextStyle(color: Colors.blue)),
+                  ],
+                ),
+              ))
             ],
             if (_errors.isNotEmpty)
               Text(_errors, style: const TextStyle(color: Colors.red)),
             if (_output.isNotEmpty) ...[
-              const Text('Output:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('Output:',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Text(_output),
+                  child: Column(
+                    children: [
+                      Text("id : $_heId",
+                          style: const TextStyle(color: Colors.black54)),
+                      Text("Status : $_status",
+                          style: const TextStyle(color: Colors.green)),
+                      Text("Output: ",
+                          style: const TextStyle(color: Colors.black)),
+                      Text(_output, style: const TextStyle(color: Colors.blue)),
+                    ],
+                  ),
                 ),
               ),
             ],
